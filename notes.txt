@@ -1,0 +1,8 @@
+TODO
+
+Next:
+Move most of the main function's contents into global scope (more flexible)
+Document (comment) the code better
+
+Later:
+Possible to set each faces color in the shape file

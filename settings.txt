@@ -1,0 +1,10 @@
+size 1000 1000
+bgcolor #000000
+drawcolor #000000
+fillfaces true
+usefaces true
+shape cube
+rotspeed 3
+scalespeed 0.05
+interactive true
+vertex_highlight 0
