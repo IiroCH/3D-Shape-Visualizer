@@ -10,7 +10,7 @@ phi/-1/0/5 > 2
 0/phi/-1/5 > 10
 0/-phi/-1/5 > 11
 0/-phi/1/5 > 12
-end-vertexes-begin-faces
+end-vertices-begin-faces
 1/2/5
 1/2/8
 1/5/9

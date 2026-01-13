@@ -41,7 +41,7 @@ hex_table = {"0": 0, 0: "0",
 # Generate a hex string for a random color
 def random_color():
     color = "#"
-    for i in range(6):
+    for _ in range(6):
         color += hex_table[randint(4, 15)]
 
     return color
@@ -68,7 +68,7 @@ def build_shape(shape_file):
     faces = []
     parsing_faces = False
     for line in shape_file:
-        if line.strip() == "end-vertexes-begin-faces":
+        if line.strip() == "end-vertices-begin-faces":
             parsing_faces = True
         elif not parsing_faces:
             tokens = line.strip().split(" > ")
@@ -82,10 +82,10 @@ def build_shape(shape_file):
             
             vertex_table[int(tokens[1])] = Vertex(vertexdata)
         elif parsing_faces:
-            vertexes = []
+            vertices = []
             for vertex in line.split("/"):
-                vertexes.append(vertex_table[int(vertex)])
-            faces.append(Face(vertexes, random_color()))
+                vertices.append(vertex_table[int(vertex)])
+            faces.append(Face(vertices, random_color()))
     return Shape(faces)
 
 
@@ -144,7 +144,7 @@ def main():
                 if tokens[1] == "false":
                     fillfaces = False
             case "usefaces":
-                # Set whether faces or vertexes
+                # Set whether faces or vertices
                 # are used for drawing the shape
                 if tokens[1] == "true":
                     usefaces = True
@@ -199,8 +199,8 @@ def main():
     print(f"Height: {screen.window_height()}")
     print(f"Depth: {window_depth}")
     print()
-    print(f"Starting vertex coordinates ({len(shape.vertexes)} in total):")
-    for vertex in shape.vertexes:
+    print(f"Starting vertex coordinates ({len(shape.vertices)} in total):")
+    for vertex in shape.vertices:
         print(f"X: {vertex.x}\tY: {vertex.y}\tZ: {vertex.z}")
 
 
@@ -217,31 +217,31 @@ def main():
         if usefaces:
             if fillfaces:
                 for face in sorted(shape.faces, key=dist_from_cam):
-                    vertexes = face.vertexes
-                    turtle.teleport(vertexes[0].y * w_mult, vertexes[0].z * h_mult)
+                    vertices = face.vertices
+                    turtle.teleport(vertices[0].y * w_mult, vertices[0].z * h_mult)
                     turtle.fillcolor(face.color)
                     turtle.begin_fill()
-                    for i in range(1, len(vertexes)):
+                    for i in range(1, len(vertices)):
                         turtle.dot(vertex_size)
-                        turtle.goto(vertexes[i].y * w_mult, vertexes[i].z * h_mult)
+                        turtle.goto(vertices[i].y * w_mult, vertices[i].z * h_mult)
                     turtle.dot(vertex_size)
-                    turtle.goto(vertexes[0].y * w_mult, vertexes[0].z * h_mult)
+                    turtle.goto(vertices[0].y * w_mult, vertices[0].z * h_mult)
                     turtle.end_fill()
             else:
                 for face in shape.faces:
-                    vertexes = face.vertexes
-                    turtle.teleport(vertexes[0].y * w_mult, vertexes[0].z * h_mult)
+                    vertices = face.vertices
+                    turtle.teleport(vertices[0].y * w_mult, vertices[0].z * h_mult)
                     turtle.dot(vertex_size)
-                    for i in range(1, len(vertexes)):
-                        turtle.goto(vertexes[i].y * w_mult, vertexes[i].z * h_mult)
+                    for i in range(1, len(vertices)):
+                        turtle.goto(vertices[i].y * w_mult, vertices[i].z * h_mult)
                         turtle.dot(vertex_size)
-                    turtle.goto(vertexes[0].y * w_mult, vertexes[0].z * h_mult)
+                    turtle.goto(vertices[0].y * w_mult, vertices[0].z * h_mult)
         else:
-            for vertex in shape.vertexes:
+            for vertex in shape.vertices:
                 turtle.teleport(vertex.y * w_mult, vertex.z * h_mult)
                 turtle.dot(max([20, vertex_size]))
 
-                neighbours = vertex.neighbours(shape.vertexes)
+                neighbours = vertex.neighbours(shape.vertices)
                 for neighbour in neighbours:
                     turtle.goto(neighbour.y * w_mult, neighbour.z * h_mult)
                     turtle.teleport(vertex.y * w_mult, vertex.z * h_mult)
@@ -250,7 +250,7 @@ def main():
 
     # Rotate shape up
     def rot_up():
-        for vertex in shape.vertexes:
+        for vertex in shape.vertices:
             vertex.rotate(0, rotspeed)
         for face in shape.faces:
             face.update_center()
@@ -258,7 +258,7 @@ def main():
 
     # Rotate shape down
     def rot_down():
-        for vertex in shape.vertexes:
+        for vertex in shape.vertices:
             vertex.rotate(0, -rotspeed)
         for face in shape.faces:
             face.update_center()
@@ -266,7 +266,7 @@ def main():
 
     # Rotate shape right
     def rot_right():
-        for vertex in shape.vertexes:
+        for vertex in shape.vertices:
             vertex.rotate(rotspeed, 0)
         for face in shape.faces:
             face.update_center()
@@ -274,7 +274,7 @@ def main():
 
     # Rotate shape left
     def rot_left():
-        for vertex in shape.vertexes:
+        for vertex in shape.vertices:
             vertex.rotate(-rotspeed, 0)
         for face in shape.faces:
             face.update_center()
@@ -282,13 +282,13 @@ def main():
 
     # Scale shape up
     def scale_up():
-        for vertex in shape.vertexes:
+        for vertex in shape.vertices:
             vertex.scale(scalespeed, d_mult)
         refresh()
 
     # Scale shape down
     def scale_down():
-        for vertex in shape.vertexes:
+        for vertex in shape.vertices:
             vertex.scale(-scalespeed, d_mult)
         refresh()
 

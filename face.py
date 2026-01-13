@@ -1,6 +1,6 @@
 """
-Class of faces (collections of points) of a 3D object.
-Each face stores the vertexes defining it
+Class of faces of a 3D object.
+Each face stores the vertices defining it
 and the coordinate of its center (as a vertex).
 """
 
@@ -9,35 +9,35 @@ from random import randint
 from vertex import *
 
 
-# Calculate the center of the given vertexes in 3D
+# Calculate the center of the given vertices in 3D
 # and return that center vertex
-def calc_center(vertexes):
+def calc_center(vertices):
     x = 0
     y = 0
     z = 0
-    for vertex in vertexes:
+    for vertex in vertices:
         x += vertex.x
         y += vertex.y
         z += vertex.z
-    x = x / len(vertexes)
-    y = y / len(vertexes)
-    z = z / len(vertexes)
+    x = x / len(vertices)
+    y = y / len(vertices)
+    z = z / len(vertices)
 
     return Vertex([x, y, z, 0])
 
 
 class Face:
 
-    def __init__(self, vertexes, color="#FF0000"):
+    def __init__(self, vertices, color="#FF0000"):
 
-        self.__vertexes = vertexes
+        self.__vertices = vertices
         self.__color = color
         
-        self.__center = calc_center(vertexes)
+        self.__center = calc_center(vertices)
 
     @property
-    def vertexes(self):
-        return self.__vertexes
+    def vertices(self):
+        return self.__vertices
 
     @property
     def color(self):
@@ -52,4 +52,4 @@ class Face:
 
     # Recalculate the face's center
     def update_center(self):
-        self.__center = calc_center(self.vertexes)
+        self.__center = calc_center(self.vertices)

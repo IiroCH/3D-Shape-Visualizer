@@ -1,6 +1,6 @@
 """
-Class of 3D objects (collections of vertexes and faces).
-Each shape stores the faces and vertexes defining it.
+Class of 3D objects.
+Each shape stores the faces and vertices defining it.
 """
 
 from face import *
@@ -12,15 +12,15 @@ class Shape:
 
         vertex_list = []
         for face in faces:
-            for vertex in face.vertexes:
+            for vertex in face.vertices:
                 if vertex not in vertex_list:
                     vertex_list.append(vertex)
-        self.__vertexes = vertex_list
+        self.__vertices = vertex_list
 
     @property
     def faces(self):
         return self.__faces
 
     @property
-    def vertexes(self):
-        return self.__vertexes
+    def vertices(self):
+        return self.__vertices

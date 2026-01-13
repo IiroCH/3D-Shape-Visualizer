@@ -1,7 +1,7 @@
 """
-Class of vertexes (points) of a 3D object.
+Class of vertices of a 3D object.
 Each vertex stores its coordinates (x, y, z)
-and its number of neighbouring vertexes (stored as "edges").
+and its number of neighbouring vertices (stored as "edges").
 
 
 Coordinates:
@@ -90,10 +90,10 @@ class Vertex:
     def calc_dist(self, other):
         return math.sqrt( (self.x-other.x)**2 + (self.y-other.y)**2 + (self.z-other.z)**2 )
 
-    # Return neighbouring vertexes
-    def neighbours(self, vertexes):
-        vertexes = sorted(vertexes, key=self.calc_dist)
-        return vertexes[1:self.edges+1]
+    # Return neighbouring vertices
+    def neighbours(self, vertices):
+        vertices = sorted(vertices, key=self.calc_dist)
+        return vertices[1:self.edges+1]
 
     # Rotate the vertex around the origin
     def rotate(self, h_angle, v_angle):
@@ -122,7 +122,9 @@ class Vertex:
 
         new_r = r * (1 + multiplier)
         
-        if new_r > 0 and new_r <= max_scale:
+        if new_r > max_scale:
+            r = max_scale
+        elif new_r > 0:
             r = new_r
 
         self.x, self.y, self.z = to_cartesian(r, long, lat)
