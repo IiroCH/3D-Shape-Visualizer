@@ -1,3 +1,7 @@
+"""
+Module of utility functions
+"""
+
 from random import randint
 
 # Decimal and hexademical conversion table
