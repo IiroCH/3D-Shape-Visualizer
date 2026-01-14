@@ -1,3 +1,5 @@
+from random import randint
+
 # Decimal and hexademical conversion table
 hex_table = {"0": 0, 0: "0",
              "1": 1, 1: "1",
