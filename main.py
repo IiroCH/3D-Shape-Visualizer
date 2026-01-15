@@ -5,7 +5,8 @@ Main module for the application
 from renderer import *
 
 def main():
-    start_visualization()
+    renderer = Renderer()
+    renderer.start_visualization()
 
 
 if __name__ == "__main__":
