@@ -2,12 +2,11 @@
 Main module for the application
 """
 
-from renderer import *
+from cli import *
 
 def main():
-    renderer = Renderer()
-    renderer.start_visualization()
-
+    cli = CLI()
+    cli.read()
 
 if __name__ == "__main__":
     main()

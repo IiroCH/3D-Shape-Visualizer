@@ -1,4 +1,4 @@
-# 3D Shape Visualizer
+# Look
 An interactive visualizer for 3D objects
 
 
